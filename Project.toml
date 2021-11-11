@@ -1,0 +1,9 @@
+name = "BookTemplate"
+uuid = "6b2b467d-d873-4a19-b33c-0abffd8470ba"
+authors = ["You"]
+version = "0.0.0"
+
+[deps]
+Books = "939d5c6b-51ae-42e7-97ca-7564d0d4ad91"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Reexport = "189a3867-3050-52da-a836-e630ba90ab69"

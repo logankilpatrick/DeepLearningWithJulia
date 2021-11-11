@@ -1,0 +1,26 @@
+---
+title: Your Awesome Book
+subtitle: A Template to Get Your Book Started
+author:
+  - Example author 1
+  - Example author 2
+
+html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+
+bibliography: files/bibliography.bib
+
+# Only used in PDF.
+titlepage-top: >
+  \begin{tabular}{l}
+  Example author 1\\
+  Example institute 1\\
+  \\
+  Example author 2\\
+  Example institute 2\\
+  \\
+  \end{tabular}
+
+titlepage-bottom: >
+  \url{https://booktemplate.huijzer.xyz}
+---

@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  # This schedule is not required for most books.
+  # It's just used to run this template occasionally to test whether the template still works.
+  schedule:
+    - cron: '00 04 * * 6'
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  BuildAndDeploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: "1.6"
+
+      - uses: actions/cache@v1
+        env:
+          cache-name: cache-artifacts
+        with:
+          path: ~/.julia/artifacts
+          key: ${{ runner.os }}-test-${{ env.cache-name }}-${{ hashFiles('**/Project.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-test-${{ env.cache-name }}-
+            ${{ runner.os }}-test-
+            ${{ runner.os }}-
+
+      - name: Install dependencies and extra dependencies
+        run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate();
+                using Books; Books.install_dependencies()'
+
+      - run: julia --project -e 'using BookTemplate; BookTemplate.build()'
+
+      - name: Deploy to secondary branch
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          cname: booktemplate.huijzer.xyz
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # To avoid missing bugs and to keep the gh-pages repository small.
+          force_orphan: true
+          publish_dir: ./_build/

@@ -1,0 +1,6 @@
+_build/
+_gen/
+*.log
+Manifest.toml
+.vscode/
+.DS_Store
