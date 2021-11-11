@@ -1,0 +1,3 @@
+# Preface {#sec:preface}
+
+The world is undergoing a radical shift. Machine Learning (and specifically Deep Learning) uses are being accelerated across every industry and domain. Humans have unlocked a significant new tool, the likes of which has not been seen since the software explosion took place in the early 2000's. But what does this mean for developers and those interested in writing these tools? 

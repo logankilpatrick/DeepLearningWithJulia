@@ -1,9 +1,8 @@
 ---
-title: Your Awesome Book
-subtitle: A Template to Get Your Book Started
+title: Deep Learning with Julia
+subtitle: using Flux.jl
 author:
-  - Example author 1
-  - Example author 2
+  - Logan Kilpatrick
 
 html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
@@ -13,12 +12,9 @@ bibliography: files/bibliography.bib
 # Only used in PDF.
 titlepage-top: >
   \begin{tabular}{l}
-  Example author 1\\
-  Example institute 1\\
-  \\
-  Example author 2\\
-  Example institute 2\\
-  \\
+  Logan Kilpatrick\\
+  The Julia Language\\
+  logan@julialang.org\\
   \end{tabular}
 
 titlepage-bottom: >

@@ -8,7 +8,7 @@
   ]
 
   # Full URL, required for the sitemap and robots.txt.
-  online_url = "https://booktemplate.huijzer.xyz"
+  online_url = "https://deeplearningwithjulia.com"
 
   # Extra directories to be copied.
   extra_directories = []
@@ -16,4 +16,4 @@
   # Port used by serve()
   port = 8004
 
-  output_filename = "booktemplate"
+  output_filename = "DeepLearningWithJulia"
