@@ -3,6 +3,9 @@
   [projects.default]
   contents = [
     "about",
+    "preface",
+    "why_julia",
+    "transfer_learning",
     "appendix",
     "references",
   ]

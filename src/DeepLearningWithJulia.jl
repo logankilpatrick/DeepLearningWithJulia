@@ -2,9 +2,11 @@ module BookTemplate
 
 using Reexport: @reexport
 @reexport begin
+
 using Books:
     build_all,
     gen
+
 using DataFrames:
     DataFrame,
     filter!,
@@ -13,8 +15,8 @@ using DataFrames:
     select
 end # @reexport
 
-include("data.jl")
-export example_dataframe
+# include("data.jl")
+# export example_dataframe
 
 """
     build()
