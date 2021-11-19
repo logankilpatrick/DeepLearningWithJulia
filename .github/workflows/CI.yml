@@ -1,10 +1,6 @@
 name: CI
 
 on:
-  # This schedule is not required for most books.
-  # It's just used to run this template occasionally to test whether the template still works.
-  schedule:
-    - cron: '00 04 * * 6'
   push:
     branches:
       - main
@@ -34,18 +30,18 @@ jobs:
             ${{ runner.os }}-test-
             ${{ runner.os }}-
 
-      - name: Install dependencies and extra dependencies
+      - name: Install dependencies
         run: julia --color=yes --project -e 'using Pkg; Pkg.instantiate();
                 using Books; Books.install_dependencies()'
 
-      - run: julia --project -e 'using BookTemplate; BookTemplate.build()'
+      - run: >
+          DISPLAY=:0 xvfb-run -s '-screen 0 1024x768x24' julia --project -e 'using DeepLearningWithJulia; DeepLearningWithJulia.build()'
 
       - name: Deploy to secondary branch
         if: ${{ github.event_name != 'pull_request' }}
         uses: peaceiris/actions-gh-pages@v3
         with:
-          cname: booktemplate.huijzer.xyz
+          cname: deeplearningwithjulia.com
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          # To avoid missing bugs and to keep the gh-pages repository small.
           force_orphan: true
           publish_dir: ./_build/

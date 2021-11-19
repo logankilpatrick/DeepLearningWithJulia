@@ -31,5 +31,7 @@ function build()
     build_all(; fail_on_error)
 end
 
+include("ci.jl")
+
 end # module
 
