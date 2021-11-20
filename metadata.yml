@@ -4,7 +4,7 @@ subtitle: using Flux.jl
 author:
   - Logan Kilpatrick
 
-html-license: <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+html-license: <a href="https://twitter.com/OfficialLoganK?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false"></a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
 tex-license: Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 
 bibliography: files/bibliography.bib
