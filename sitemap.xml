@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+    <loc>https://deeplearningwithjulia.com/welcome</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/about</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/getting-started</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/preface</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/why_deep_learning</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/book_motivation</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/acknowledgements</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/why_julia</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/dispatch</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/packages</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/community</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/transfer_learning</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/pre-trained_models</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/metalhead</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/appendix</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+<url>
+    <loc>https://deeplearningwithjulia.com/references</loc>
+    <lastmod>2021-11-30</lastmod>
+    <changefreq>monthly</changefreq>
+</url>
+
+</urlset>

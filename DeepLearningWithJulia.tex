@@ -1,0 +1,646 @@
+\documentclass[
+  notoc % Suppress Tufte style table of contents.
+]{tufte-book}
+
+% Required Tufte packages.
+\usepackage{changepage} % or changepage
+\usepackage{fancyhdr}
+\usepackage{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{bibentry}
+\usepackage{optparams}
+\usepackage{paralist}
+\usepackage{placeins}
+\usepackage{ragged2e}
+\usepackage{setspace}
+\usepackage{textcase}
+\usepackage{textcomp}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{xcolor}
+\usepackage{xifthen}
+
+\geometry{paperheight=10in,paperwidth=7in,marginparwidth=30mm,marginparsep=2mm,bindingoffset=10mm,top=10mm,inner=8mm,outer=8mm,bottom=16mm,includehead,includemp}
+
+% Tufte vs. Pandoc workaround.
+% Issue: https://github.com/Tufte-LaTeX/tufte-latex/issues/64.
+\renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+\renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+
+% \setmainfont{TeX Gyre Pagella}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\setmainfont{texgyrepagella}[
+  Extension = .otf,
+  UprightFont = *-regular,
+  BoldFont = *-bold,
+  ItalicFont = *-italic,
+  BoldItalicFont = *-bolditalic,
+]
+
+\newfontfamily\JuliaMono{JuliaMono}[
+  UprightFont = *-Regular,
+  BoldFont = *-Bold
+]
+\newfontface\JuliaMonoRegular{JuliaMono-Regular}
+\newfontface\JuliaMonoBold{JuliaMono-Bold}
+
+\setmonofont{JuliaMono-Medium}[
+  Contextuals=Alternate,
+  Ligatures=NoCommon
+]
+
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
+
+\usepackage{float}
+\floatplacement{figure}{H}
+
+% Listings Julia syntax definition.
+\input{/home/runner/.julia/packages/Books/oARrL/defaults/julia_listings.tex}
+
+% Unicode support.
+\input{/home/runner/.julia/packages/Books/oARrL/defaults/julia_listings_unicode.tex}
+
+% Used by Pandoc.
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+}
+\newcommand{\passthrough}[1]{#1}
+
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{array}
+
+% Source: Wandmalfarbe/pandoc-latex-template.
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+
+\definecolor{linkblue}{HTML}{117af2}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks,
+  citecolor=linkblue,
+  linkcolor=linkblue,
+  urlcolor=linkblue,
+  linktoc=page, % Avoid Table of Contents being nearly completely blue.
+  pdftitle={Deep Learning with Julia},
+  pdfauthor={Logan Kilpatrick},
+  pdflang={en-US},
+  breaklinks=true,
+  pdfcreator={LaTeX via Pandoc}%
+}
+\urlstyle{same} % disable monospaced font for URLs
+
+\title{Deep Learning with Julia}
+\author{\noindent{Logan Kilpatrick}\\[3mm] }
+\date{}
+
+% Re-enable section numbering which was disabled by tufte.
+\setcounter{secnumdepth}{2}
+
+% Fix captions for longtable.
+% Thanks to David Carlisle at https://tex.stackexchange.com/a/183344/92217.
+\makeatletter
+\def\LT@makecaption#1#2#3{%
+  \noalign{\smash{\hbox{\kern\textwidth\rlap{\kern\marginparsep
+  \parbox[t]{\marginparwidth}{\vspace{12pt}%
+\@tufte@caption@font \@tufte@caption@justification \noindent
+   #1{#2: }\ignorespaces #3}}}}}}
+\makeatother
+
+% Doesn't seem to do anything.
+\usepackage{float}
+\floatplacement{figure}{H}
+\floatplacement{table}{H}
+
+% Reduce large spacing around sections.
+\titlespacing*{\chapter}{0pt}{5pt}{20pt}
+\titlespacing*{\section}{0pt}{2.5ex plus 1ex minus .2ex}{1.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{1.75ex plus 1ex minus .2ex}{1.0ex plus.2ex}
+
+\titleformat{\chapter}%
+  [hang]% shape
+  {\normalfont\huge\itshape}% format applied to label+text
+  {\huge\thechapter}% label
+  {1em}% horizontal separation between label and title body
+  {}% before the title body
+  []% after the title body
+
+% Reduce spacing in table of contents.
+\usepackage{etoolbox}
+\makeatletter
+\pretocmd{\chapter}{\addtocontents{toc}{\protect\addvspace{-3\p@}}}{}{}
+\pretocmd{\section}{\addtocontents{toc}{\protect\addvspace{-4\p@}}}{}{}
+\pretocmd{\subsection}{\addtocontents{toc}{\protect\addvspace{-5\p@}}}{}{}
+\makeatother
+
+% Long texts are harder to read than tables.
+% Therefore, we can reduce the font size of the table.
+\AtBeginEnvironment{longtable}{\footnotesize}
+
+% Some space between paragraphs is necessary because code blocks can output single line paragraphs.
+\setlength\parskip{1em plus 0.1em minus 0.2em}
+
+% For justified text.
+\usepackage{ragged2e}
+
+% tufte-book disables subsubsections by default.
+% Got this definition back via `\show\subsubsection`.
+
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+
+% URL line breaks.
+\usepackage{xurl}
+
+% Probably doesn't hurt.
+\usepackage{marginfix}
+
+
+\begin{document}
+
+\makeatletter
+\thispagestyle{empty}
+\vfill
+{\Huge\bf
+\noindent
+\@title
+}\\[1in]
+{\Large
+\noindent
+\@author
+}
+\makeatother
+
+\makeatletter
+\newpage
+\thispagestyle{empty}
+\vfill
+{\noindent
+\begin{tabular}{l} Logan Kilpatrick\\ The Julia Language\\ logan@julialang.org\\ \end{tabular}
+}
+\vfill
+{\small
+\url{https://deeplearningwithjulia.com}
+
+2021-11-30
+
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+}
+\makeatother
+
+
+% Don't remove this or authors will show up in header of every page.
+\frontmatter
+\mainmatter
+\fancyfoot[C]{\url{https://github.com/johndoe/Book.jl}}
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+% Justify text.
+\justifying
+
+% parindent seems to be set from within another class too.
+% it is really not useful here because it will also indent lines directly after
+% code blocks. Which most of the times not useful.
+\setlength{\parindent}{0pt}
+
+\hypertarget{sec:about}{%
+\chapter{About}\label{sec:about}}
+
+\begin{figure}
+\centering
+\includegraphics{https://user-images.githubusercontent.com/35577566/142680741-276551f1-6ec6-4eba-b625-4e88d70dda13.png}
+\caption{Deep Learning with Julia}
+\end{figure}
+
+Deep Learning with Julia is a book about how to do various deep learning
+tasks using the Julia programming language and specifically the Flux.jl
+package. The intent of the book is to prove that serious deep learning
+can be done in Julia and that the ecosystem as a whole is ready for the
+spotlight.
+
+\hypertarget{getting-started}{%
+\section{Getting Started}\label{getting-started}}
+
+All of the code and resources for this book are stored here on GitHub
+and deployed to \url{https://deeplearningwithjulia.com}.
+
+This book is built via \href{https://books.huijzer.xyz}{Books.jl} and is
+made possible by the Julia programming language
+(\protect\hyperlink{ref-bezanson2017julia}{Bezanson et al., 2017}) and
+\href{https://github.com/jgm/pandoc}{pandoc}.
+
+\hypertarget{sec:preface}{%
+\chapter{Preface}\label{sec:preface}}
+
+The world is undergoing a radical shift. Machine Learning (and
+specifically Deep Learning) uses are being accelerated across every
+industry and domain. Humans have unlocked a significant new tool, the
+likes of which has not been seen since the software explosion took place
+in the early 2000's. But what does this mean for developers and those
+interested in working with these tools?
+
+Like many field in the technology industry, there is a great deal of
+gate keeping in the Machine Learning community. Those in positions of
+power often make it seem as though using and understanding machine
+learning is reserved for those with PhD's and years of experience. This
+could not be farther from the truth. As the use of machine learning has
+increased, the barrier to entry have been slowly torn down. The result
+is that students with minimal programming and machine learning
+experience can now enter into the field and make advancements on the
+current state of the art.
+
+In this book, we will touch on: - What the Julia Programming Language is
+and why we will be using it - What Deep Learning is - Various
+applications of Deep Learning
+
+\hypertarget{sec:why_deep_learning}{%
+\section{Why Deep Learning?}\label{sec:why_deep_learning}}
+
+Why are we focusing on Deep Learning? How is that any different than
+machine learning? These are both great questions. We will delve more
+into the details in chapter 2, but the quick answer is that deep
+learning is a specific machine learning technique and the reason we want
+to focus on it is that many of the advancements as well as applications
+you have read about under the ``AI'' or ``Machine Learning'' title, are
+actually deep learning solutions under the hood. Use cases like Self
+Driving cars, digital voice assistants, recommendation engines (like on
+YouTube and Netflix) are all powered by Deep Learning.
+
+\hypertarget{sec:book_motivation}{%
+\section{Why does this book exist?}\label{sec:book_motivation}}
+
+What was the point of writing this book? Currently, almost all deep
+learning practitioners use Python and most Deep Learning books focus on
+Python. Given the popularity of the language, this is a natural choice,
+especially given the prevalence of high quality libraries like Pandas,
+Numpy, Tensorflow, Pytorch, etc. However, as the Julia programming
+language continues to grow and gain adoption, more and more users are
+coming and expecting a world class deep learning experience. While we
+have Flux.jl for deep learning in Julia, there are not currently any
+resources for learning about deep learning in Julia. Conversely, in the
+Python ecosystem, there are at least 4-5 foundational deep learning
+books which I personally used during my learning journey and I found to
+be excellent. The goal for this book is to show people that doing deep
+learning in Julia is a viable choice and more so than that, could
+actually come with significant advantages over other languages and
+frameworks.
+
+\hypertarget{sec:acknowledgements}{%
+\section{Acknowledgements}\label{sec:acknowledgements}}
+
+I could write an entire book itself just going through all of the folks
+who have helped me get here. In general, this book, my career and life,
+are a product of support from a large group of amazing folks. From my
+parents and family, to teachers and professors, and especially the Julia
+community, without which, there would be no one reading this text. I
+will save you all from the rest of the sappy narrative but know that I
+appreciate each and every person who helped me get here.
+
+\hypertarget{sec:why_julia}{%
+\chapter{Why Julia}\label{sec:why_julia}}
+
+If you have decided to pick up this book, you likely have heard or been
+told things about the awesome power of the Julia programming language.
+This chapter is dedicated for those who have not yet been convinced that
+Julia is the language of the future. If I don't need to convince you,
+please skip to the next chapter to dive into the fun. My personal hope
+is that one day soon, the Julia community will be large and mature
+enough that authors of Julia books need not include a ``Why Julia''
+chapter. Until we get to that point, it is still worth it to talk about
+the benefits. Now back to Julia!
+
+The Julia programming language was created in 2012 by a group of folks
+who believed that the scientific computing ecosystem could be better.
+They were fed up with MATLAB and Python because the former is not Open
+Source and pay to play while the latter is generally not performant
+enough to scale up in production environments. Researchers and
+programmers alike would generally use these tools for prototyping, but
+when it came time to deploy, they would be forced to rewrite their code
+in C++ or C in order to meet the performance thresholds required.
+
+This phenomenon was coined as the ``Two Language Problem'' and Julia was
+created, in large part, to address it. After many years of hard work by
+Stefan Karpinski, Alan Edelman, Viral Shah, Jeff Bezanson, and
+enthusiastic contributors around the world, the language hit its 1.0
+version release in 2018. The 1.0 release marked a huge milestone for the
+Julia community in terms of stability and the gave confidence to users
+that Julia would be along for the long haul.
+
+In late 2021, Julia 1.6 was selected as the long term supported release.
+We will be using Julia 1.6 in this book so that the content will be as
+stable as possible for years to come.
+
+Now that we have some historical context on Julia and why it was
+created, let us next move through some additional features which make
+Julia a natural choice for Deep Learning, Machine Learning, and more
+generally, science.
+
+\hypertarget{sec:dispatch}{%
+\section{Multiple Dispatch}\label{sec:dispatch}}
+
+There is no one better to talk about the idea Multiple Dispatch and its
+use in Julia than Stefan Karpinski. In a 2019 JuliaCon talk titled ``The
+Unreasonable effectiveness of Multiple Dispatch''
+(https://youtu.be/kc9HwsxE1OY), Stefan went on to state that the Julia
+ecosystem has more code re-use than any ecosystem he has ever seen.
+Multiple Dispatch is the paradigm that allows this to happen. So what is
+Multiple Dispatch and why is it so unreasonably effective? For the
+latter point, I suggest watching Stefan's talk, there is no sense in
+re-stating what he already put eloquently. So back to the main question,
+what is multiple dispatch? The main idea here is that you can write
+multiple functions with the same name, which dispatch (or are called
+dynamically) depending on the types of the input arguments. This idea is
+not something necessarily unique to Julia, other languages have multiple
+dispatch or similar concepts. But the way in which it is used and
+implemented in Julia is the secret sauce. Let us now look at a quick
+example:
+
+\hypertarget{sec:packages}{%
+\section{Package Management}\label{sec:packages}}
+
+Most people are unlikely to choose a programming language based on its
+package manager (or lack thereof). Despite this reality, the Julia
+package manager is one of those features that really makes me appreciate
+the language. Julia's package manager is extremely simple to work with
+and also enables much more reproducible code. Let us explore and see how
+this is the case:
+
+There are two different fundamental ways of working with packages in
+Julia: via the REPL's Pkg mode and via the Pkg package. I will focus on
+using the REPL since it is extremely intuitive for new users. You can
+start by launching Julia in the terminal. Then, type
+\passthrough{\lstinline!]!} in which should take you into Pkg mode:
+
+\begin{lstlisting}
+               _
+   _       _ _(_)_     |  Documentation: https://docs.julialang.org
+  (_)     | (_) (_)    |
+   _ _   _| |_  __ _   |  Type "?" for help, "]?" for Pkg help.
+  | | | | | | |/ _` |  |
+  | | |_| | | | (_| |  |  Version 1.6.3 (2021-09-23)
+ _/ |\__'_|_|_|\__'_|  |  Official https://julialang.org/ release
+|__/                   |
+
+(@v1.6) pkg> 
+\end{lstlisting}
+
+From here, one of the natural things to do is check what commands you
+can run in the package manager. To do this, type an
+\passthrough{\lstinline!?!} in and press enter/return.
+
+You will see all the possible commands:
+
+\begin{lstlisting}
+(@v1.6) pkg> ?
+  Welcome to the Pkg REPL-mode. To return to the julia> prompt, either press
+  backspace when the input line is empty or press Ctrl+C.
+
+  Synopsis
+
+  pkg> cmd [opts] [args]
+
+  Multiple commands can be given on the same line by interleaving a ; between
+  the commands. Some commands have an alias, indicated below.
+
+  Commands
+
+  activate: set the primary environment the package manager manipulates
+
+  add: add packages to project
+
+  build: run the build script for packages
+
+  develop, dev: clone the full package repo locally for development
+  ...
+  ...
+\end{lstlisting}
+
+Some of the most common commands you will use are
+\passthrough{\lstinline!add!}, \passthrough{\lstinline!activate!},
+\passthrough{\lstinline!status!} (or the shorthand
+\passthrough{\lstinline!st!}), and \passthrough{\lstinline!remove!} (or
+the shorthand \passthrough{\lstinline!rm!}). In this book, we will be
+using Flux.jl, so if you want to play around with the package, you can
+simply install it by typing \passthrough{\lstinline!add Flux!}.
+
+After the install finishes, you can check your package environment by
+typing \passthrough{\lstinline!status!}:
+
+\begin{lstlisting}
+(@v1.6) pkg> status
+      Status `~/.julia/environments/v1.6/Project.toml`
+  [587475ba] Flux v0.12.7
+\end{lstlisting}
+
+The package manager automatically shows the file which is managing the
+packages and their versions. In this case, it is
+\passthrough{\lstinline!\~/.julia/environments/v1.6/Project.toml!}. As a
+general best practice, it is recommend to always use local environments
+instead of making changes to your main Julia environment. You can do
+this by activating a new environment.
+
+\begin{lstlisting}
+julia> pwd()
+"/Users/logankilpatrick"
+
+shell> cd Desktop # type `;` to enter the shell mode from the REPL
+/Users/logankilpatrick/Desktop
+
+(@v1.6) pkg> activate .
+  Activating new environment at `~/Desktop/Project.toml`
+\end{lstlisting}
+
+In the code above, you can see I started out in my main user folder. I
+then entered the shell mode by typing \passthrough{\lstinline!;!} and
+used the change directory command to switch to my Desktop folder. From
+there, I did \passthrough{\lstinline!activate .!} which activates the
+current folder I am in. I can confirm this by typing
+\passthrough{\lstinline!status!}:
+
+\begin{lstlisting}
+(Desktop) pkg> status
+      Status `~/Desktop/Project.toml` (empty project)
+\end{lstlisting}
+
+and you can see the newly created project is empty.
+
+Hopefully these examples give you a sense of how easy to user and
+powerful the Julia package manager is. You can read more about working
+with packages from the Pkg.jl docs:
+https://pkgdocs.julialang.org/v1/getting-started/.
+
+\hypertarget{sec:community}{%
+\section{The Julia Community}\label{sec:community}}
+
+I would be remiss if I did not mention the Julia community itself as one
+of the core features of the ecosystem. Without such an incredible
+community, Julia would not be what it is today. But what makes the Julia
+community so great you might ask?
+
+\hypertarget{sec:transfer_learning}{%
+\chapter{Transfer Learning}\label{sec:transfer_learning}}
+
+Transfer learning is one of the most useful and underrated deep learning
+tools. It allows us to take a model which was trained on a large data
+set, and ``fine tune'' it (more on what that means later) to work well
+for our specific use-case. It gets its name from the idea of learned
+information being transferred from one use case to another.
+
+You might be asking yourself, why is this so powerful? Well, during the
+learning process, a deep learning model has to figure out things like
+what an edge looks like in the case of computer vision. This might seem
+like an abstract idea but it is a critical step for the model to learn
+how to distinguish between multiple objects. When we use transfer
+learning, many of these ideas have already been learned by the existing
+model we are starting with. This means that we do not need to spend as
+long training since already know some info about objects, even though
+the pre-trained model might never has seen data similar to the data you
+will be feeding into it.
+
+Here is a simple example to try and illustrate why transfer learning
+works so well: imagine you are trying to teach someone what a car is.
+This person has never seen a car nor knows what it does. This person has
+seen a bicycle before and in fact uses one everyday. You can now explain
+to the person what a car is in terms of how it relates to a bike. The
+transfer learning process is much like this. Use the existing info that
+the model has learned and build off of that for some specific situation.
+
+\hypertarget{sec:pre-trained_models}{%
+\section{Pre-trained Models}\label{sec:pre-trained_models}}
+
+The way in which we do transfer learning in the context of deep learning
+is with pre-trained models. But what is a pre-trained model? In general,
+we are referring to a model which has been trained on a specific data
+set. We will be exploring transfer learning in the context of computer
+vision so this means the model saw many images, each with a label which
+says what it is, and over time the model learned to correctly say the
+label given the image. There are a lot of different ideas going on here:
+computer vision, datasets, transfer learning, and more. \emph{If any of
+this is not making sense, that is totally expected, there is both a lot
+of jargon as well as many new ideas being introduced. Try to stay
+focused on the high level and we will come back to many of these topics
+in more detail.}
+
+Now that we know the high level idea of transfer learning, let us dive
+into a real example using Flux. To give some context, in other machine
+learning frameworks like PyTorch, the pre-trained models are built right
+into PyTorch itself. In the Flux ecosystem however, the pre-trained
+models live in a package called
+\href{https://github.com/FluxML/Metalhead.jl}{Metalhead.jl}. Metalhead
+is built to work with the Flux ecosystem so you do not need to work
+about writing compatibility issues.
+
+\hypertarget{sec:metalhead}{%
+\section{Metalhead.jl}\label{sec:metalhead}}
+
+Let us start out by installing Metalhead in the package manager by doing
+\passthrough{\lstinline!add Metalhead!}. Then we can type
+\passthrough{\lstinline!using Flux, MetalHead!} into a Julia terminal
+session. Metalhead provides a number of different model types like
+\passthrough{\lstinline!resnet!}, \passthrough{\lstinline!vgg!}, and
+more. Over the course of your deep learning experience, you will become
+more familiar with these model types as they represent some of the most
+common models for transfer learning. Before we dive into actually using
+pre-trained models, we will first take a quick look at the model
+structure which we get from Metalhead and Flux.
+
+\begin{lstlisting}
+julia> model = ResNet50(pretrain=false)
+ResNet(
+  Chain(
+    Chain(
+      Conv((7, 7), 3 => 64, pad=3, stride=2),  # 9_472 parameters
+      BatchNorm(64, relu),              # 128 parameters, plus 128
+      MaxPool((3, 3), pad=1, stride=2),
+      Parallel(
+        Metalhead.var"#18#20"(),
+        Chain(
+          Conv((1, 1), 64 => 64, bias=false),  # 4_096 parameters
+          BatchNorm(64, relu),          # 128 parameters, plus 128
+          Conv((3, 3), 64 => 64, pad=1, bias=false),  # 36_864 parameters
+          BatchNorm(64, relu),          # 128 parameters, plus 128
+          Conv((1, 1), 64 => 256, bias=false),  # 16_384 parameters
+          BatchNorm(256),               # 512 parameters, plus 512
+        ),
+        Chain(
+          Conv((1, 1), 64 => 256, bias=false),  # 16_384 parameters
+          BatchNorm(256),               # 512 parameters, plus 512
+        ),
+      ),
+      ...
+      ...
+      ...
+    Chain(
+      AdaptiveMeanPool((1, 1)),
+      Flux.flatten,
+      Dense(2048, 1000),                # 2_049_000 parameters
+    ),
+  ),
+)         # Total: 162 trainable arrays, 25_557_096 parameters,
+          # plus 106 non-trainable, 53_120 parameters, summarysize 97.749 MiB.
+\end{lstlisting}
+
+Now that is a lot to take in (even though most of the model has been
+omitted for space reasons), but at a high level, it represents the
+structure of the \passthrough{\lstinline!ResNet50!} model as defined in
+Flux. Notably, the \passthrough{\lstinline!50!} in
+\passthrough{\lstinline!ResNet50!} comes from the fact that the model
+has 50 layers. There are other ResNet like models with different numbers
+of layers but with the same overall structure.
+
+\hypertarget{appendix}{%
+\chapter*{Appendix}\label{appendix}}
+\addcontentsline{toc}{chapter}{Appendix}
+
+This is the appendix.
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\hypertarget{ref-bezanson2017julia}{}%
+Bezanson, J., Edelman, A., Karpinski, S., \& Shah, V. B. (2017). Julia:
+A fresh approach to numerical computing. \emph{SIAM Review},
+\emph{59}(1), 65--98.
+
+\end{CSLReferences}
+
+\backmatter
+
+\end{document}
